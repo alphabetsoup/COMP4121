@@ -1,0 +1,321 @@
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lecture Specific Information to Fill Out
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\LectureTitle}{Lectures Week \#5 Notes}
+%\newcommand{\LectureDate}{\today}
+\newcommand{\LectureDate}{August\ 27,\ 2013}
+\newcommand{\LectureClassName}{COMP\ 4121}
+\newcommand{\LatexerName}{Dr\ Aleks\ Ignjatovic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Change "article" to "report" to get rid of page number on title page
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{Tabbing}
+\usepackage{fancyhdr}
+
+
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{graphicx,float,wrapfig}
+\usepackage{afterpage}
+\usepackage{abstract}
+
+\usepackage[parfill]{parskip}
+% recommended from http://poisson.phc.unipi.it/~maggiolo/index.php/2008/12/latex-class-for-lecture-notes/
+\usepackage[pdf]{pstricks}
+\usepackage{pst-plot}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{mparhack}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{xfrac}
+\usepackage{faktor}
+\usepackage{cancel}
+
+\usepackage{parcolumns} 
+\usepackage{mdframed}
+
+% In case you need to adjust margins:
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+% Setup the header and footer
+\pagestyle{fancy}
+\lhead{\LatexerName}
+\chead{\LectureClassName: \LectureTitle}
+\rhead{\LectureDate}
+\lfoot{\lastxmark}
+\cfoot{}
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some tools
+\newcommand{\enterTopicHeader}[1]{\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+                                    \nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak}
+\newcommand{\exitTopicHeader}[1]{\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+                                   \nobreak\extramarks{#1}{}\nobreak}
+
+\newlength{\labelLength}
+\newcommand{\labelAnswer}[2]
+  {\settowidth{\labelLength}{#1}
+   \addtolength{\labelLength}{0.25in}
+   \changetext{}{-\labelLength}{}{}{}
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#2\end{minipage}}
+   \marginpar{\fbox{#1}}
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \changetext{}{+\labelLength}{}{}{}}
+
+\setcounter{secnumdepth}{0}
+\newcommand{\TopicName}{}
+\newcounter{TopicCounter}
+\newenvironment{Topic}[1][Problem \arabic{TopicCounter}]
+  {\stepcounter{TopicCounter}
+   \renewcommand{\TopicName}{#1}
+   \section{\TopicName}
+   \enterTopicHeader{\TopicName}}
+  {\exitTopicHeader{\TopicName}}
+  
+\setcounter{secnumdepth}{0}
+\newcommand{\ExampleSectionName}{}
+\newcounter{ExampleSectionCounter}[TopicCounter]
+\newenvironment{ExampleSection}[1][Example \arabic{ExampleSectionCounter}]
+  {\stepcounter{ExampleSectionCounter}
+   \renewcommand{\ExampleSectionName}{#1}
+   \section{\ExampleSectionName}
+   \enterTopicHeader{\ExampleSectionName}}
+  {\exitTopicHeader{\ExampleSectionName}}
+
+\setcounter{secnumdepth}{0}
+\newcounter{ExampleBoxCounter}[TopicCounter]
+\newcommand{\examplebox}[1]
+  {
+  % We put this space here to make sure we're disconnected from the previous
+   % passage
+   \stepcounter{ExampleBoxCounter}
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}\enterTopicHeader{\ExampleSectionName}\exitTopicHeader{\ExampleSectionName}\marginpar{\fbox{\#\arabic{ExampleBoxCounter}}}
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \vskip10pt
+   }
+
+\renewcommand{\contentsname}{{\normalsize Topics Covered}}
+\renewcommand{\abstractname}{\LectureTitle\ Summary}
+\renewcommand{\absnamepos}{flushleft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{spacing}{1.1}
+\newpage
+
+%\begin{abstract}
+%Prepared by Laurence Davies
+%\end{abstract}
+
+\tableofcontents
+\addtocontents{toc}{~\hfill\textbf{Page}\par}
+\vskip10pt
+\hrule
+\vskip10pt
+
+% When topics are long, it may be desirable to put a \newpage or a
+% \clearpage before each Topic environment
+%\newpage
+\begin{Topic}[\Roman{TopicCounter} Random Variables]
+
+\begin{itemize}
+\item $X_{1},...,X_{n}$  are independent if $\displaystyle P(X_{1}\in A_{1} ^ ... ^ X_{n}\in A_{n})=\prod_{i=1}^{n}P(X_{i}\in A_{i})$
+\item IID - independent identically distributed variables $X_{1},...,X_{n}$ IID $\rightarrow$ $\langle X_{1},...,X_{n} \rangle$ is a \textit{random sample of size n}. 
+\item A function of an RV is also an RV.
+\item Sample mean $\displaymode \bar{X}=\frac{X_{1}+...+X_{n}}{n}$
+%\item  
+%  \begin{itemize}
+%    \item (Rotations, reflections, glide reflections, similarities) 
+%  \end{itemize}
+\end{itemize}
+
+Assime $X_{1},...,X_{n}$ are IID, with 
+\begin{align*}
+E(X_{i})&=\mu \\
+V(X_{i})&=E(X-E(X))^{2}=\sigma^{2}
+\end{align*}
+
+\textbf{Then:} 
+\begin{align*}
+E(\bar{X})&=\mu \\
+V(\bar{X})&=\frac{\sigma}{n}
+\end{align*}
+
+Evaluating with the sample mean gives:
+
+\begin{align*}
+E(\bar{X}) &=\frac{n E(X_{1})}{n} \\&= E(X_{1}) \\
+\end{align*}
+
+\begin{align*}
+E(\bar{X}-\mu)^{2} &=E(\frac{\sum_{i=1}{n}(X_{i}-\mu)}{n})^{2}\\
+&=\frac{1}{n^{2}}(\sum_{i=1}{n}(X_{i}-\mu)^{2}+\sum_{i\ne j}{n}(X_{i}-\mu)(X_{j}-\mu))\\
+&= \frac{1}{n^{2}}\cdot n\sigma^{2}\\
+&= \frac{\sigma^{2}}{n}
+\end{align*}
+
+So $\bar{X}$ is an unbiased estimator of the true value (a.k.a. the population mean). What is an unbiased estimator of the variance $\displaystyle \sum_{i} (X_{i}-\bar{X})^{2}$?
+
+\begin{align*}
+E(\sum_{i} (X_{i}-\bar{X})^{2})
+&= E(\sum_{i} (X_{i}^{2}-2X_{i}\bar{X} + \bar{X}^{2}))\\
+&= E(\sum_{i} X_{i}^{2}-2(\sum_{i} X_{i})\bar{X} + n\bar{X}^{2})\\
+&= E(nX^{2}-2n\bar{X}^{2} + n\bar{X}^{2})\\
+&= nE(nX^{2})-nE(\bar{X}^{2})
+\end{align*}
+
+What is $E(X^{2})$?
+
+\begin{align*}
+\sigma^{2} &= E(X-\mu)^{2}\\
+ &= E(X^{2}-2\mu X + \mu^{2})\\
+ &= E(X^{2})-2\mu^{2} + \mu^{2})\\
+ &= E(X^{2})-\mu^{2})\\
+\end{align*}
+
+So 
+
+\begin{align}
+E(X^{2})&=\sigma^{2}+\mu^{2}
+\end{align}
+
+So we get
+
+\begin{align*}
+E(\sum_{i} (X_{i}-\bar{X})^{2})
+ &= n\cdot (\sigma^{2} + \mu^{2}) - n\cdot (\frac{\sigma^{2}}{n}- \mu^{2})\\
+ &= n\sigma^{2} + n\mu^{2} - \sigma^{2}- n\mu^{2}\\
+ &= n\sigma^{2} + \sigma^{2}\\
+ &= (n-1)\sigma^{2}\\
+\end{align*}
+
+So an unbiased variance estimator is
+
+\begin{align}
+\frac{1}{n-1}\sum_{i}(X_{i}-\bar{X})^{2}
+\end{align}
+
+\end{Topic}
+
+
+\begin{Topic}[\Roman{TopicCounter} Likelihood]
+Assume you have a coin with $P(H)=p$ which is unknown. You toss it 16 times and get\\
+
+\begin{align*}
+HHTHTHHHTTHHTHHT
+\end{align*}
+
+For what value of $p$ is such an outcome \textit{most likely}? We have 10 heads so intuitively $p$ should be $\frac{10}{16}$. To show this, start with\\
+
+\begin{align*}
+P(p)&=p^{10}(1-p)^{6}\\
+\frac{\partial P}{\partial p} &= 10p^{9}(1-p)^{6} + p^{10}\cdot 6(1-p)^{5}(-1)\\
+&= p^{9}(1-p)^{5}(10(1-p)-6p)\\
+&= p^{9}(1-p)^{5}(10-10p-6p)\\
+\end{align*}
+
+So $P(p)$ has a maximum value
+\begin{align*}
+16p&=10\\
+p&=\frac{10}{16}
+\end{align*}
+
+The likelihood function is \textbf{not} a probability function on the space of parameters. It is equal to:
+\begin{enumerate}
+\item In the discrete case: The probability to have such an outcome given the unknown parameters.
+\item In the continuous case: The probability density function for such an outcome.
+\end{enumerate}
+
+\begin{ExampleSection}
+Assume you have $n$\textbf{unbiased} sensors with an unknown but equal standard deviation.
+You have $n$ readings $X_{1},...,X_{n}$ of the same quantity. How would you estimate the true value $\mu$ and $\sigma$?
+
+\begin{align*}
+\ell_{n}(\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+\frac{\partial\ell_{n}}{\partial\mu}&=\frac{\partial}{\partial\mu}(\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}})\\
+&=\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}\cdot\frac{-2}{2\sigma^{2}}\sum_{i}(X_{i}-\mu) 
+  & \text{ because } \mu=\frac{\sum_{i}X_{i}}{n} \\
+&= -n(2\pi)^{\frac{-n}{2}}\sigma^{-n-1}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}+
+   (2\pi)^{\frac{-n}{2}}\sigma^{-n}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}
+   (-2) \frac{-\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{3}}\\
+\end{align*}
+
+\begin{align*}
+\frac{\partial\ell_{n}}{\partial\mu}&=0 
+&\leftrightarrow&
+-n+(\sigma^{-1})^{2}&=0\\
+& &\leftrightarrow&
+\sum_{i}(X_{i}-\m)^{2}&=0\\
+\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}\\
+\end{align*}
+We found that $\mu=\bar{X}$, so
+\begin{align*}
+\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}\\
+\end{align*}
+is a biased estimator.
+
+\end{ExampleSection}
+
+\begin{ExampleSection}
+Given $n$ sensors with known variances $\sigma_{1}^{2},...,\sigma_{n}^{2}$ and $n$ readings $X_{1},...,X_{n}$. What is the maximum likelihood estimation of $\mu$?
+
+\begin{align*}
+\ell_{n}(\vec{X},\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{(2\pi)^{\frac{n}{2}}\sigma_{i}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+
+\frac{\partial\ell_{n}}{\partial\mu}
+&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}} - 2\sum_{i}\frac{X_{i}-\mu}{2\sigma_{i}}\\
+\end{align*}
+
+So
+\begin{align*}
+\frac{\partial\ell_{n}}{\partial\mu} &= 0
+&\leftrightarrow&
+\sum_{i}\frac{X_{i}}{\sigma_{i}}&=\sum_{i}\frac{1}{\sigma_{i}}\mu\\
+& &\leftrightarrow&
+\mu&=
+\frac{\sum_{i}\frac{1}{\sigma_{i}}X_{i}}{\sum_{k}\frac{1}{\sigma_{k}}}\\
+\end{align*}
+}
+\end{ExampleSection}
+
+\end{Topic}
+
+
+
+
+%\begin{center}
+%\begin{figure}[h]
+%\begin{center}
+%\end{center}
+%\caption{} %     title of the Figure
+%\label{fig:} % label to refer figure in text
+%\end{figure}
+%\end{center}
+
+%\newpage
+
+\end{spacing}
+\end{document}
+
