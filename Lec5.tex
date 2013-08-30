@@ -134,6 +134,7 @@
 \vskip10pt
 \hrule
 \vskip10pt
+\newpage
 
 % When topics are long, it may be desirable to put a \newpage or a
 % \clearpage before each Topic environment
@@ -144,7 +145,7 @@
 \item $X_{1},...,X_{n}$  are independent if $\displaystyle P(X_{1}\in A_{1} ^ ... ^ X_{n}\in A_{n})=\prod_{i=1}^{n}P(X_{i}\in A_{i})$
 \item IID - independent identically distributed variables $X_{1},...,X_{n}$ IID $\rightarrow$ $\langle X_{1},...,X_{n} \rangle$ is a \textit{random sample of size n}. 
 \item A function of an RV is also an RV.
-\item Sample mean $\displaymode \bar{X}=\frac{X_{1}+...+X_{n}}{n}$
+\item Sample mean $\displaystyle \bar{X}=\frac{X_{1}+...+X_{n}}{n}$
 %\item  
 %  \begin{itemize}
 %    \item (Rotations, reflections, glide reflections, similarities) 
@@ -219,7 +220,7 @@ So an unbiased variance estimator is
 
 \end{Topic}
 
-
+\newpage
 \begin{Topic}[\Roman{TopicCounter} Likelihood]
 Assume you have a coin with $P(H)=p$ which is unknown. You toss it 16 times and get\\
 
@@ -253,7 +254,7 @@ Assume you have $n$\textbf{unbiased} sensors with an unknown but equal standard 
 You have $n$ readings $X_{1},...,X_{n}$ of the same quantity. How would you estimate the true value $\mu$ and $\sigma$?
 
 \begin{align*}
-\Lagr_{n}(\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+\Lagr_{n}(\mu,\sigma)&=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
 \frac{\partial\Lagr_{n}}{\partial\mu}&=\frac{\partial}{\partial\mu}(\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}})\\
 &=\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}\cdot\frac{-2}{2\sigma^{2}}\sum_{i}(X_{i}-\mu) 
   \text{   because } \mu=\frac{\sum_{i}X_{i}}{n} \\
@@ -268,11 +269,12 @@ You have $n$ readings $X_{1},...,X_{n}$ of the same quantity. How would you esti
 -n+(\sigma^{-1})^{2}=0\\
 &\leftrightarrow
 \sum_{i}(X_{i}-\m)^{2}=0\\
-\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}\\
+\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}
 \end{align*}
+
 We found that $\mu=\bar{X}$, so
 \begin{align*}
-\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}\\
+\sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}
 \end{align*}
 is a biased estimator.
 
@@ -282,10 +284,10 @@ is a biased estimator.
 Given $n$ sensors with known variances $\sigma_{1}^{2},...,\sigma_{n}^{2}$ and $n$ readings $X_{1},...,X_{n}$. What is the maximum likelihood estimation of $\mu$?
 
 \begin{align*}
-\Lagr_{n}(\vec{X},\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{(2\pi)^{\frac{n}{2}}\sigma_{i}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
-&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+\Lagr_{n}(\vec{X},\mu,\sigma)&=\prod_{i=1}^{n}\frac{1}{(2\pi)^{\frac{n}{2}}\sigma_{i}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}^{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
 \frac{\partial\Lagr_{n}}{\partial\mu }
-&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}} - 2\sum_{i}\frac{X_{i}-\mu}{2\sigma_{i}}\\
+&=(2\pi)^{-\frac{n}{2}}\prod_{i=1}^{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}} - 2\sum_{i}\frac{X_{i}-\mu}{2\sigma_{i}}\\
 \end{align*}
 
 So
@@ -298,7 +300,8 @@ So
 \mu=
 \frac{\sum_{i}\frac{1}{\sigma_{i}}X_{i}}{\sum_{k}\frac{1}{\sigma_{k}}}\\
 \end{align*}
-}
+
+
 \end{ExampleSection}
 
 \end{Topic}
@@ -357,6 +360,44 @@ Equating the derivative to zero
 
 \begin{ExampleSection}
 What is the likelihood of obtaining readings $E_{ip}$ if all sensors have variance $\sigma^{2}$?
+
+\begin{align*}
+\Lagr_{n}(E^{i},\vec{r},\sigma)&=\prod_{i\rightarrow k}\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{(E_{ik}-\sqrt{k})^{2}}{2\sigma}}\\
+ln(\Lagr_{n}(E^{i},\vec{r},\sigma))&=\sum_{i\rightarrow k}-\frac{1}{2}ln(2\pi\sigma)-\frac{(E_{ik}-\sqrt{k})^{2}}{2\sigma}\\
+&=-\frac{1}{2}ln(2\pi\sigma)\cdot m_{i}-\frac{\sum_{i\rightarrow k}(E_{ik}-\sqrt{k})^{2}}{2\sigma}\\
+\frac{2\sigma^{2}}{m_{i}}ln(\Lagr_{n}(E^{i},\vec{r},\sigma))&=-\sigma^{2}ln(2\pi\sigma)-\sum_{i\rightarrow k}(E_{ik}-\sqrt{k})^{2}\\
+\frac{2\sigma^{2}}{m_{i}}ln(\Lagr_{n}(E^{i},\vec{r},\sigma))&= [ -\sigma^{2}ln(2\pi\sigma)-C ] + [ C -\sum_{i\rightarrow k}(E_{ik}-\sqrt{k})^{2} ]\\
+\end{align*}
+
+where $C$ is chosen such that $[ -\sigma^{2}ln(2\pi\sigma)-C ]=0$. Let $T_{i}= C -\sum_{i\rightarrow k}(E_{ik}-\sqrt{k})^{2}$, and so
+
+\begin{align*}
+(\frac{2\sigma^{2}}{m_{i}}ln(\Lagr_{n}(E^{i},\vec{r},\sigma)))^{2} &= T_{i}^{2}\\
+\frac{2\sigma^{4}}{m_{i}}(ln(\Lagr_{n}(E^{i},\vec{r},\sigma)))^{2} &= m_{i}T_{i}^{2}\\ %shouldn't the 2 be a 4?
+\sum_{i}m_{i}T_{i}^{2} &= 2\sigma^{4}\sum_{i}\frac{ln\Lagr_{i}(E^{i},\vec{r},\sigma)^{2}}{m_{i}}
+\end{align*}
+
+Let again
+
+\begin{align*}
+g(\vec{r})&=\sum_{i}m_{i}T_{i}^{2}
+\end{align*}
+
+then
+
+\begin{align*}
+\frac{\partial g(\vec{r})}{\partial\sqrt{k}}
+ &=2\sum_{i}m_{i}T_{i}\frac{\partial T_{i}}{\partial\sqrt{k}}\\
+ &=2\sum_{i}m_{i}T_{i}\frac{\partial(C -\sum_{p\rightarrow k}(E_{ip}-\sqrt{p})^{2})}{\partial\sqrt{k}}\\
+ &=-4\sum_{i}m_{i}T_{i}(-\frac{1}{m_{i}})\sum_{fixme}(E_{ik}-\sqrt{k})\\
+ &=4\sum_{i}T_{i}\sum_{fixme}(E_{ik}-\sqrt{k})\\
+ &=4\sum_{i}T_{i}E_{ik}-4\frac{\sum_{i\rightarrow k}(T_{i}\sqrt{k})}{i\sum_{fixme}T_{i}}\\
+\frac{1}{4\sum_{i\rightarrow k}T_{i}}\frac{\partial g(\vec{r})}{\partial\sqrt{k}}
+ &=\sum_{i}T_{i}E_{ik}-\sqrt{k}\\
+r_{k}^{t+1}&=r_{k}^{t}+\frac{1}{4\sum_{i\rightarrow k}T_{i}}\frac{\partial g(r)}{\partial r_{k}}\\
+r^{t+1}&=\vec{r}+\frac{1}{4\sum_{i\rightarrow k}T_{i}}\nabla g\\
+\end{align*}
+
 \end{ExampleSection}
 
 
