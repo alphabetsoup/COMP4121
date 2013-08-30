@@ -8,6 +8,7 @@
 \newcommand{\LectureClassName}{COMP\ 4121}
 \newcommand{\LatexerName}{Dr\ Aleks\ Ignjatovic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Lagr}{\mathcal{L}}
 
 % Change "article" to "report" to get rid of page number on title page
 \usepackage{amsmath,amsfonts,amsthm,amssymb}
@@ -252,21 +253,21 @@ Assume you have $n$\textbf{unbiased} sensors with an unknown but equal standard 
 You have $n$ readings $X_{1},...,X_{n}$ of the same quantity. How would you estimate the true value $\mu$ and $\sigma$?
 
 \begin{align*}
-\ell_{n}(\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
-\frac{\partial\ell_{n}}{\partial\mu}&=\frac{\partial}{\partial\mu}(\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}})\\
+\Lagr_{n}(\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+\frac{\partial\Lagr_{n}}{\partial\mu}&=\frac{\partial}{\partial\mu}(\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}})\\
 &=\frac{1}{(2\pi\sigma^{2})^{\frac{n}{2}}}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}\cdot\frac{-2}{2\sigma^{2}}\sum_{i}(X_{i}-\mu) 
-  & \text{ because } \mu=\frac{\sum_{i}X_{i}}{n} \\
+  \text{   because } \mu=\frac{\sum_{i}X_{i}}{n} \\
 &= -n(2\pi)^{\frac{-n}{2}}\sigma^{-n-1}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}+
    (2\pi)^{\frac{-n}{2}}\sigma^{-n}e^{-\frac{\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{2}}}
    (-2) \frac{-\sum_{i}(X_{i}-\mu)^{2}}{2\sigma^{3}}\\
 \end{align*}
 
 \begin{align*}
-\frac{\partial\ell_{n}}{\partial\mu}&=0 
-&\leftrightarrow&
--n+(\sigma^{-1})^{2}&=0\\
-& &\leftrightarrow&
-\sum_{i}(X_{i}-\m)^{2}&=0\\
+\frac{\partial\Lagr_{n}}{\partial\mu}=0 
+&\leftrightarrow
+-n+(\sigma^{-1})^{2}=0\\
+&\leftrightarrow
+\sum_{i}(X_{i}-\m)^{2}=0\\
 \sigma^{2}&=\frac{\sum_{i}(X_{i}-\m)^{2}}{n}\\
 \end{align*}
 We found that $\mu=\bar{X}$, so
@@ -281,20 +282,20 @@ is a biased estimator.
 Given $n$ sensors with known variances $\sigma_{1}^{2},...,\sigma_{n}^{2}$ and $n$ readings $X_{1},...,X_{n}$. What is the maximum likelihood estimation of $\mu$?
 
 \begin{align*}
-\ell_{n}(\vec{X},\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{(2\pi)^{\frac{n}{2}}\sigma_{i}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
+\Lagr_{n}(\vec{X},\mu,\sigma)&=\prod_{i=1}{n}\frac{1}{(2\pi)^{\frac{n}{2}}\sigma_{i}}e^{-\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
 &=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}}\\
-
-\frac{\partial\ell_{n}}{\partial\mu}
+\frac{\partial\Lagr_{n}}{\partial\mu }
 &=(2\pi)^{-\frac{n}{2}}\prod_{i=1}{n}\sigma_{i}^{-1}\cdot e^{-\sum_{i}\frac{(X_{i}-\mu)^{2}}{2\sigma^{2}}} - 2\sum_{i}\frac{X_{i}-\mu}{2\sigma_{i}}\\
 \end{align*}
 
 So
 \begin{align*}
-\frac{\partial\ell_{n}}{\partial\mu} &= 0
-&\leftrightarrow&
-\sum_{i}\frac{X_{i}}{\sigma_{i}}&=\sum_{i}\frac{1}{\sigma_{i}}\mu\\
-& &\leftrightarrow&
-\mu&=
+\frac{\partial\Lagr_{n}}{\partial\mu} = 0
+&\leftrightarrow
+\sum_{i}\frac{X_{i}}{\sigma_{i}}
+=\sum_{i}\frac{1}{\sigma_{i}}\mu\\
+&\leftrightarrow
+\mu=
 \frac{\sum_{i}\frac{1}{\sigma_{i}}X_{i}}{\sum_{k}\frac{1}{\sigma_{k}}}\\
 \end{align*}
 }
@@ -302,7 +303,64 @@ So
 
 \end{Topic}
 
+\begin{Topic}[\Roman{TopicCounter} Maximum Likelihood Estimates]
+Is the ML estrimate always a "good" one?
 
+\begin{ExampleSection}
+You have a box with a certain number of balls, numbered consecutively $1,2,3,4,...$.
+You pick one at random, see its number and have to estimate the total number of balls in the box.\\
+\textbf{Maximum Likelihood Estimate}: If you picked a ball with a number $k$, such a ball is
+most likely if there are $k$ balls in the box, because then the probability of picking this ball is
+$\frac{1}{k}$. The expected value of your estimate is
+
+\begin{align*}
+\frac{1+2+...+n}{n} &= \frac{n(n-1)}{2n}\\
+&=\frac{n-1}{2}
+\end{align*}
+
+So your ML is heavily biased! On the other hand, if your estimate is $2X-1$ then
+
+\begin{align*}
+E(2X-1) &= \sum_{i}\frac{2\cdot i-1}{n}\\
+&= \frac{2n(n+1)-n}{n}\\
+&= n
+\end{align*}
+
+hence this estimate is unbiased.\\
+
+Then to evaluate
+
+\begin{align*}
+T_{i} &= C-\frac{1}{m_{i}}\sum_{i\rightarrow p}(E_{ip}-\sqrt{p})^{2}
+\end{align*}
+
+We maximise
+
+\begin{align*}
+\tau &= \sum_{i}m_{i}T_{i}^{2} \\
+     &= \sum_{i}m_{i}( C-\frac{1}{m_{i}}\sum_{i\rightarrow p}(E_{ip}-\sqrt{p})^{2} )^{2} \\
+\frac{\partial\tau}{\partial\sqrt{k}} 
+     &= 4\sum_{i\rightarrow k}m_{i}( C-\frac{1}{m_{i}}\sum_{i\rightarrow p}(E_{ip}-\sqrt{p})^{2} )^{2} \cdot\frac{E_{ik}-\sqrt{k}}{m_{i}}\\
+     &= 4\sum_{i\rightarrow k}T_{i}( E_{ik}-\sqrt{k}) \\
+     &= 4\sum_{i\rightarrow k}T_{i}E_{ik}-(\sum_{i\rightarrow k}T_{i})\sqrt{k} \\
+\end{align*}
+
+Equating the derivative to zero
+
+\begin{align*}
+\frac{\partial\tau}{\partial\sqrt{k}} = 0
+     &\leftrightarrow
+\sqrt{k}=\frac{\sum_{i\rightarrow k}T_{i}E_{ik}}{\sum_{i\rightarrow k}T_{i}}
+\end{align*}
+
+\end{ExampleSection}
+
+\begin{ExampleSection}
+What is the likelihood of obtaining readings $E_{ip}$ if all sensors have variance $\sigma^{2}$?
+\end{ExampleSection}
+
+
+\end{Topic}
 
 
 %\begin{center}
